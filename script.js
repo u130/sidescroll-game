@@ -1,24 +1,36 @@
 /* global $ */
 
-function showBoard() {
-    $('#start').hide();
-    $('#board').show();
-}
 
 function jump() {
     
 }
 
 $(document).ready(function() {
-   $('#start').click(function() {
-      showBoard();
-   });
-   
-   $('#jump').mousedown(function() {
-      $('#mario').css('bottom', '175px');
-      $('#coin').hide();
-   });
-   
+    $('#jump').mousedown(function() {
+        $('#mario').css('bottom', '175px');
+        $('#coin').hide();
+    });
+      
+    $("body").keydown(function(event){
+        if (event.which === 38) {
+            $("#mario").css("bottom", '175px');
+        }
+             
+        if (event.which === 37 || event.which === 65) {
+            $("#mario").css("left", $("#mario").offset().left - 40);
+        //moves right
+        } else if (event.which === 39 || event.which === 68) {
+            $("#mario").css("left", $("#mario").offset().left + 40);
+        } else if (event.which === 38 || event.which=== 87 ) {
+        }
+
+    });
+    $("body").keyup(function(event){
+        if (event.which === 38 ) {
+            $("#mario").css("bottom", '60px');
+        }
+    });
+        
    var count = 1;
    
     $('#jump').mouseup(function() {
@@ -26,19 +38,4 @@ $(document).ready(function() {
       $('#coin').show();
       $('#count').text(count++);
    });
-   
-   $("body").keydown(function(e) {
-      if(e.keyCode == 37) { // left
-        $("#game").animate({
-          backgroundPosition: "+=980"
-        });
-      }
-      else if(e.keyCode == 39) { // right
-        $("#game").animate({
-          backgroundPosition: "-=980"
-        });
-      } else if(e.keyCode == 49) {
-          jump();
-      }
-    });
 });
